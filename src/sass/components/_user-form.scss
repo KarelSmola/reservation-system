@@ -1,15 +1,28 @@
 .user-form {
   display: grid;
-  justify-content: start;
-  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 3rem;
+  column-gap: 4rem;
 
   &__label-box {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 1rem;
   }
 
   &__label {
     @include formLabel;
+  }
+
+  &__input {
+    padding: 1rem;
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+  }
+
+  &__icon {
+    color: #000;
   }
 }
