@@ -1,0 +1,11 @@
+.staff-member {
+  @include componentMainGrid;
+
+  &__title {
+    font-size: $font-size-title-2;
+  }
+
+  &__select {
+    @include input;
+  }
+}

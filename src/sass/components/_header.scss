@@ -1,0 +1,12 @@
+.header {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  background-color: $color-first;
+  padding: 2rem 0;
+
+  &__header-title {
+    color: $color-fourth;
+    font-size: $font-size-title-1;
+  }
+}

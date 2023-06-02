@@ -1,0 +1,49 @@
+.services {
+  @include componentMainGrid;
+  width: 80%;
+
+  &__title {
+    font-size: $font-size-title-2;
+  }
+
+  &__list-wrap {
+    width: 100%;
+  }
+
+  &__list {
+    display: grid;
+    gap: 0.3rem;
+    list-style: none;
+  }
+
+  &__list-item {
+    display: grid;
+    grid-template-columns: 4rem 5fr 1fr 1fr;
+    padding: 1rem 0;
+    background-color: #fff;
+  }
+
+  &__radio-btn {
+  }
+
+  &__service-name,
+  &__service-duration,
+  &__service-price {
+    font-size: $font-size-normal;
+  }
+
+  &__service-name {
+  }
+
+  &__service-duration,
+  &__service-price {
+    justify-self: center;
+  }
+
+  &__service-duration {
+    color: #999;
+  }
+
+  &__service-price {
+  }
+}
