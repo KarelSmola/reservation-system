@@ -1,0 +1,38 @@
+.slots {
+  @include componentMainGrid;
+
+  &__title {
+    font-size: $font-size-title-2;
+  }
+
+  &__content-wrap {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+  }
+
+  &__switch-week-btn {
+  }
+
+  &__week-slots {
+    list-style: none;
+  }
+
+  &__day-slot-wrap {
+    display: grid;
+    justify-items: center;
+    padding: 0.5rem 2rem;
+    background-color: $color-second;
+    color: $color-fourth;
+    font-size: $font-size-normal;
+  }
+
+  &__week-day {
+  }
+
+  &__date {
+    font-weight: $font-weight-bold;
+  }
+
+  &__forward-btn {
+  }
+}
