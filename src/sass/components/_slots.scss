@@ -7,13 +7,17 @@
 
   &__content-wrap {
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: auto 5fr auto;
+    gap: 2rem;
   }
 
   &__switch-week-btn {
   }
 
   &__week-slots {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
     list-style: none;
   }
 
