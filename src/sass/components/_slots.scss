@@ -8,10 +8,31 @@
   &__content-wrap {
     display: grid;
     grid-template-columns: auto 5fr auto;
+    align-items: center;
     gap: 2rem;
   }
 
   &__switch-week-btn {
+    display: grid;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+
+    // &--previous {
+    // }
+    // &--next {
+    // }
+  }
+
+  &__switch-week-btn svg {
+    font-size: 4rem;
+    color: $color-second;
+  }
+
+  &__switch-week-btn:hover svg {
+    cursor: pointer;
+    color: $color-first;
+    transform: scale(1.05);
   }
 
   &__week-slots {
@@ -24,19 +45,18 @@
   &__day-slot-wrap {
     display: grid;
     justify-items: center;
+    gap: 0.2rem;
     padding: 0.5rem 2rem;
     background-color: $color-second;
     color: $color-fourth;
     font-size: $font-size-normal;
   }
 
-  &__week-day {
+  &__week-day-item:nth-child(2) {
+    font-weight: 700;
   }
 
   &__date {
     font-weight: $font-weight-bold;
-  }
-
-  &__forward-btn {
   }
 }

@@ -1,23 +1,24 @@
 import React, { useState } from "react";
+import { LeftArrow, RightArrow } from "./UI/Icons/Icons";
+
+const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const month = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const Slots = () => {
   const [newDate, setNewDate] = useState(new Date());
-
-  const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  const month = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
 
   let currentDay = new Date(
     newDate.getFullYear(),
@@ -46,28 +47,24 @@ const Slots = () => {
     currentDays.push(calenderDay);
   }
 
-  const previousWeek = () => {};
-
-  const nextWeek = () => {};
-
   return (
     <div className="slots">
       <h2 className="slots__title">Select a date and time</h2>
       <div className="slots__content-wrap">
-        <button className="slots__switch-week-btn" onClick={previousWeek}>
-          Back
+        <button className="slots__switch-week-btn slots__switch-week-btn--previous">
+          <LeftArrow />
         </button>
         <ul className="slots__week-slots">
           {currentDays.map((day) => (
             <li className="slots__day-slot-wrap">
-              <p className="slots__week-day">{day.weekDay}</p>
-              <p className="slots__week-day">{day.day}</p>
-              <p className="slots__week-day">{day.month}</p>
+              <p className="slots__week-day-item">{day.weekDay}</p>
+              <p className="slots__week-day-item">{day.day}</p>
+              <p className="slots__week-day-item">{day.month}</p>
             </li>
           ))}
         </ul>
-        <button className="slots__switch-week-btn" onClick={nextWeek}>
-          Forward
+        <button className="slots__switch-week-btn slots__switch-week-btn--next">
+          <RightArrow />
         </button>
       </div>
     </div>
