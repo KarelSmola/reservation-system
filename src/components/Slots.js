@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LeftArrow, RightArrow } from "./UI/Icons/Icons";
+import { useSelector } from "react-redux";
 
 const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const month = [
@@ -19,6 +20,7 @@ const month = [
 
 const Slots = () => {
   const [newDate, setNewDate] = useState(new Date());
+  const wholeState = useSelector((state) => state);
 
   let currentDay = new Date(
     newDate.getFullYear(),
@@ -47,6 +49,10 @@ const Slots = () => {
     currentDays.push(calenderDay);
   }
 
+  const showState = () => {
+    console.log(wholeState);
+  };
+
   return (
     <div className="slots">
       <h2 className="slots__title">Select a date and time</h2>
@@ -67,6 +73,10 @@ const Slots = () => {
           <RightArrow />
         </button>
       </div>
+
+      <button className="slots__book-btn" onClick={showState}>
+        Book
+      </button>
     </div>
   );
 };

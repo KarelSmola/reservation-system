@@ -1,67 +1,44 @@
-import React, { useReducer, useEffect } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { formActions } from "../store";
 
 import { Person, Envelope, Mobile } from "./UI/Icons/Icons";
 
-const initialState = {
-  inputValues: { firstName: "", lastName: "", email: "", phone: "" },
-  blur: { firstName: false, lastName: false, email: false, phone: false },
-};
-
-const formReducer = (state, action) => {
-  if (action.type === "CHANGE_HANDLER") {
-    return {
-      ...state,
-      inputValues: { ...state.inputValues, ...action.payload },
-    };
-  }
-
-  if (action.type === "BLUR") {
-    return { ...state, blur: { ...state.blur, ...action.payload } };
-  }
-
-  return initialState;
-};
-
 const UserForm = () => {
-  const [state, dispatch] = useReducer(formReducer, initialState);
+  const dispatch = useDispatch();
+  const completeState = useSelector((state) => state);
 
-  const { firstName, lastName, email, phone } = state.inputValues;
-
-  useEffect(() => {
-    const timer = setTimeout(() => {}, 2000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [firstName, lastName, email, phone]);
-
-  const inputBlurHandler = (event) => {
+  const changeHandler = (event) => {
     const name = event.target.name;
-    dispatch({ type: "BLUR", payload: { [name]: true } });
+    dispatch(formActions.inputValue({ [name]: event.target.value }));
   };
 
-  const inputChangeHandler = (event) => {
+  const blurHandler = (event) => {
     const name = event.target.name;
-    const value = event.target.value;
-    dispatch({
-      type: "CHANGE_HANDLER",
-      payload: { [name]: value },
-    });
+    dispatch(formActions.inputIsTouched({ [name]: true }));
   };
 
-  const validName = state.inputValues.firstName.trim().length !== 0;
-  const invalidName = !validName && state.blur.firstName;
+  const invalidClass = "user-form__input user-form__input--invalid";
+  const validClass = "user-form__input";
 
-  const validLastName = state.inputValues.lastName.trim().length !== 0;
-  const invalidLastName = !validLastName && state.blur.lastName;
+  const firstNameIsValid = completeState.inputValues.firstName.trim() !== "";
+  const invalidFirstName =
+    !firstNameIsValid && completeState.isTouched.firstName;
+  const firstNameClasses = invalidFirstName ? invalidClass : validClass;
 
-  const inputNameClasses = invalidName
-    ? "user-form__input user-form__input--invalid"
-    : "user-form__input";
+  const lastNameIsValid = completeState.inputValues.lastName.trim() !== "";
+  const invalidLastName = !lastNameIsValid && completeState.isTouched.lastName;
+  const lastNameClasses = invalidLastName ? invalidClass : validClass;
 
-  const inputLastNameClasses = invalidLastName
-    ? "user-form__input user-form__input--invalid"
-    : "user-form__input";
+  const emailIsValid =
+    completeState.inputValues.email.trim().length > 5 &&
+    completeState.inputValues.email.includes("@");
+  const invalidEmail = !emailIsValid && completeState.isTouched.email;
+  const emailClasses = invalidEmail ? invalidClass : validClass;
+
+  const phoneIsValid = completeState.inputValues.phone.trim() !== "";
+  const invalidPhone = !phoneIsValid && completeState.isTouched.email;
+  const phoneClasses = invalidPhone ? invalidClass : validClass;
 
   return (
     <div className="user-form">
@@ -72,13 +49,13 @@ const UserForm = () => {
             <Person className="user-form__icon" />
           </label>
           <input
-            className={inputNameClasses}
+            className={firstNameClasses}
             id="first-name"
             name="firstName"
             type="text"
             placeholder="First name"
-            onChange={inputChangeHandler}
-            onBlur={inputBlurHandler}
+            onChange={changeHandler}
+            onBlur={blurHandler}
           />
         </div>
         <div className="user-form__label-box">
@@ -86,13 +63,13 @@ const UserForm = () => {
             <Person className="user-form__icon" />
           </label>
           <input
-            className={inputLastNameClasses}
+            className={lastNameClasses}
             id="last-name"
             name="lastName"
             type="text"
             placeholder="Last name"
-            onChange={inputChangeHandler}
-            onBlur={inputBlurHandler}
+            onChange={changeHandler}
+            onBlur={blurHandler}
           />
         </div>
         <div className="user-form__label-box">
@@ -100,13 +77,13 @@ const UserForm = () => {
             <Envelope className="user-form__icon" />
           </label>
           <input
-            className="user-form__input"
+            className={emailClasses}
             id="email"
             name="email"
             type="email"
             placeholder="E-mail"
-            onChange={inputChangeHandler}
-            onBlur={inputBlurHandler}
+            onChange={changeHandler}
+            onBlur={blurHandler}
           />
         </div>
         <div className="user-form__label-box">
@@ -114,13 +91,13 @@ const UserForm = () => {
             <Mobile className="user-form__icon" />
           </label>
           <input
-            className="user-form__input"
+            className={phoneClasses}
             id="phone"
             name="phone"
             type="tel"
             placeholder="Mobile"
-            onChange={inputChangeHandler}
-            onBlur={inputBlurHandler}
+            onChange={changeHandler}
+            onBlur={blurHandler}
           />
         </div>
       </form>
